@@ -1,0 +1,39 @@
+{% extends 'admin/admin_base.html' %} 
+
+{% block body %}
+
+<div class="container p-4">
+    <a href="{% url 'admin_page' %}" class="text-decoration-none">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+      </svg>
+      Back
+    </a>
+    <div class="row">
+      <div class="col-sm col-md-6 col-lg-6">
+        <div class="card shadow rounded p-3">
+            <div class="card-title fw-bold">
+                Applicant Info
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Applicant Name: {{applicant.user.last_name}}, {{applicant.user.first_name}} {{applicant.middle_name}}</li>
+                <li class="list-group-item">Applicant Email: {{applicant.user.email}}</li>
+                <li class="list-group-item">Age: {{applicant.age}}</li>
+                <li class="list-group-item">Birthdate: {{applicant.birthdate}}</li>
+                <li class="list-group-item">Address: {{applicant.house_no}} {{applicant.barangay}}, {{applicant.municipality}}, {{applicant.province}}</li>
+                <li class="list-group-item">Contact: {{applicant.contact}}</li>
+                <li class="list-group-item">Tin Number: {{applicant.tin_number}}</li>
+                <li class="list-group-item">Working Experience: {{applicant.working_exp}}</li>
+                <li class="list-group-item">Previous Employer: {{applicant.prev_employer}}</li>
+                <li class="list-group-item">Employement Status: {{applicant.employment_status}}</li>
+                <li class="list-group-item">If employed: {{applicant.employed}}</li>
+                <li class="list-group-item">Currently in School: {{applicant.currently_in_school}}</li>
+                <li class="list-group-item">Highest Educational Attainment: {{applicant.educational_attainment}}</li>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block body %}
+
+<div class="container p-4">
+  <a href="{% url 'ann-list' %}" class="text-decoration-none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+    </svg>
+    Back to announcement list
+  </a>
+  <div class="row">
+    <div class="col-sm col-md-8 col-lg-8">
+      <div class="card shadow rounded p-3 mt-3">
+        <div class="card-title">
+            <h3>{{announcement.title}}</h3>
+            <small class='text-muted'>
+              Posted by: {{announcement.posted_by}} <br> Date posted: {{announcement.created_at}} 
+            </small>
+        </div>
+        <hr>
+        <div class="card-content mt-2 mb-2">
+          <p>
+            {{announcement.content}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm col-md-4 col-lg-4">
+      {% if announcement.posted_by.email == user.email %}
+      <div class="list-group mt-3">
+        <a href="{% url 'ann-update' announcement.id %}" class="list-group-item list-group-item-action">Update this announcement</a>
+        <a href="{% url 'ann-delete' announcement.id %}" class="list-group-item list-group-item-action">Delete this announcement</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

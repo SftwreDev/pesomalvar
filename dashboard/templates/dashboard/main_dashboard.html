@@ -1,0 +1,55 @@
+{% extends 'admin/admin_base.html' %} {% block body %}
+<section class="section">
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <!-- ========== title-wrapper end ========== -->
+    <div class="row mt-5">
+      <div class="col-sm col-md-3 col-lg-4">
+        <div class="icon-card mb-30 "   style="height: 150px;">
+          <div class="icon purple">
+            <i class="lni lni-user"></i>
+          </div>
+          <div class="content">
+            <p class="mb-10" style="font-size: 12px;">Total No. of Users</p>
+            <p class="text-3xl   dark:text-white">
+              {{users_count|default_if_none:"0"}}
+          </p>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-sm col-md-3 col-lg-4 ">
+        <div class="icon-card mb-30"   style="height: 150px;">
+          <div class="icon primary">
+            <i class="lni lni-users"></i>
+          </div>
+          <div class="content ">
+            <p class="mb-10" style="font-size: 12px;">New Registered Users</p>
+            <p class="text-3xl   dark:text-white">
+              {{new_users|default_if_none:"0"}}
+          </p>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <div class="col-sm col-md-3 col-lg-4 ">
+        <div class="icon-card mb-30"   style="height: 150px;">
+          <div class="icon success">
+            <i class="lni lni-briefcase"></i>
+          </div>
+          <div class="content ">
+            <p class="mb-10" style="font-size: 12px;">Total Jobs Posted</p>
+            <p class="text-3xl   dark:text-white">
+              {{job_posted|default_if_none:"0"}}
+          </p>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+  </div>
+    {% include "dashboard/summary.html" %}
+  <!-- end container -->
+</section>
+{% endblock %}
