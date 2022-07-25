@@ -135,9 +135,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-STATIC_ROOT = (
-    BASE_DIR / "staticfiles",
-)
+STATIC_ROOT = BASE_DIR / "staticfiles",
 # Base url to serve media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = (BASE_DIR / 'media')
