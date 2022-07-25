@@ -86,8 +86,8 @@ class EmployerSignUpView(CreateView):
         print("USER ID", user.id)
         full_name = user.first_name
         email = encrypt_email(user.email)
-        link = f"https://pesowebapp-dqrst.ondigitalocean.app/verify-email/{email}"
-        # send_email(user.email, full_name, link)
+        link = f"https://pesomalvar.herokuapp.com/verify-email/{email}"
+        send_email(user.email, full_name, link)
         employer = Employer.objects.create(
             user_id=user.id, 
             company_name=form.cleaned_data['company_name'], 
@@ -145,8 +145,8 @@ class ApplicantSignUpView(CreateView):
         print("USER ID", user.id)
         full_name = user.first_name
         email = encrypt_email(user.email)
-        link = f"https://pesowebapp-dqrst.ondigitalocean.app/verify-email/{email}"
-        # send_email(user.email, full_name, link)
+        link = f"https://pesomalvar.herokuapp.com/verify-email/{email}"
+        send_email(user.email, full_name, link)
         employer = Applicant.objects.create(
             user_id=user.id, 
             middle_name=form.cleaned_data['middle_name'], 
@@ -250,7 +250,7 @@ def logout_user(request):
 def reset_password_emai(request):
     email = request.POST['email']
     reset_email = encrypt_email(email)
-    link = f"https://pesowebapp-dqrst.ondigitalocean.app/reset-password/{reset_email}"
+    link = f"https://pesomalvar.herokuapp.com/reset-password/{reset_email}"
     send_reset_email(email, link)
     return redirect('login')
 
