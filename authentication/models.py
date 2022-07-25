@@ -1,6 +1,4 @@
-from audioop import maxpp
-from lib2to3.pytree import Base
-from this import d
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from config.models import BaseModel
