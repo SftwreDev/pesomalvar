@@ -88,13 +88,24 @@ WSGI_APPLICATION = 'pesowebapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "da7mg0d2uhfbhc",
+        'USER': "cabgewlnepizbu",
+        'PASSWORD': "d2015207aa6b8a7bd9d186a75254f2265a2693c572646c19b160b33b927d4e59",
+        'HOST': "ec2-34-239-241-121.compute-1.amazonaws.com",
+        'PORT':  "5432"
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
