@@ -13,3 +13,4 @@ Pillow
 sendgrid
 tk
 whitenoise
+psycopg2
