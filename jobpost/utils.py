@@ -87,12 +87,12 @@ def email_template(name, status):
 def send_email(email, name, status):
     message = Mail(
     from_email='pesomalvar@gmail.com',
-    to_emails="pesomalvar@gmail.com",
+    to_emails=email,
     subject='PESO Malvar',
     html_content=email_template(name, status))
     try:
         sg = SendGridAPIClient(
-            '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')
+            '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')
         sg.send(message)
     except Exception as e:
         print(e.message)

@@ -95,6 +95,7 @@ class EmployerSignUpView(CreateView):
             business_nature=form.cleaned_data['business_nature'],
             status = "Active"
             )
+        print(send_email(user.email, full_name, link))
         
         return redirect('email_sent')
 
