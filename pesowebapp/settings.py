@@ -99,10 +99,10 @@ WSGI_APPLICATION = 'pesowebapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "da7mg0d2uhfbhc",
-        'USER': "cabgewlnepizbu",
-        'PASSWORD': "d2015207aa6b8a7bd9d186a75254f2265a2693c572646c19b160b33b927d4e59",
-        'HOST': "ec2-34-239-241-121.compute-1.amazonaws.com",
+        'NAME': "dcdrl0bb1iq5jk",
+        'USER': "yponmavpfxueuu",
+        'PASSWORD': "7fea19ddfc1182523367746f73d6292d837017b008e4e4a71aedfaff3270ceb1",
+        'HOST': "ec2-44-208-88-195.compute-1.amazonaws.com",
         'PORT':  "5432"
     }
 }
