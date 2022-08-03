@@ -37,7 +37,8 @@ def jobpost_detail(request, pk):
     jobs = JobPost.objects.get(id=pk)
     applicant_forms = ApplyJobForm(request.POST or None, request.FILES or None)
     try:
-        status = ApplicationForm.objects.get(jobs_id=jobs.id, user_id=request.user.id)
+        status = ApplicationForm.objects.get(jobs_id=pk, user_id=request.user.id)
+        print(status)
     except Exception as e:
         status = ""
         print(e)
@@ -98,17 +99,16 @@ def job_posted(request):
 @login_required(login_url="login")
 def applicants(request):
     template_name = "jobpost/applicants.html"
-    obj = JobPost.objects.select_related().filter(posted_by_id=request.user.id)
-    
-    for jobs in obj:
-        applicants = ApplicationForm.objects.filter(jobs_id=jobs.id)
+    try:
+        obj = JobPost.objects.select_related().filter(posted_by_id=request.user.id).values()
+        applicants = ApplicationForm.objects.filter(jobs_id__posted_by=request.user.id)
         context = {
             "applicants" : applicants
         }
-        
         return render(request, template_name, context)
-    
-    return render(request, template_name)
+    except Exception as e:
+        print(e)
+        return render(request, template_name)
 
 @login_required(login_url="login")
 def view_applicants(request, pk):

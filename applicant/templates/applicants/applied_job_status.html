@@ -10,7 +10,12 @@
           Date posted: {{jobs.created_at}}</small
         >
         <hr />
-        <div class="card-content">{{jobs.description|linebreaks}}</div>
+        <div class="card-content">
+          {% if jobs.attach_file %}
+            <img src="{{jobs.attach_file.url}}" class="img-fluid" alt="...">
+          {% endif %}
+          {{jobs.description|linebreaks}}
+        </div>
       </div>
     </div>
   </div>
