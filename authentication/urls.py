@@ -18,5 +18,6 @@ urlpatterns = [
     path("reset-password-email", reset_password_emai, name="reset_password_emai"),
     path("reset-password/<str:str>", reset_password, name="reset-password"),
     path("applicant_update/<int:pk>", applicantprofile_update, name="applicant_update"),
-    path("employer_update/<int:pk>/", employer_update, name="employer_update")
+    path("employer_update/<int:pk>/", employer_update, name="employer_update"),
+    path("password-reset-sent", password_reset_email_sent, name="password_reset_email_sent"),
 ]

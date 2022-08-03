@@ -12,8 +12,8 @@ def main_dashboard(request):
     if 'from_date' in request.GET or  'to_date' in request.GET:
         from_date = request.GET['from_date']
         to_date = request.GET['to_date']
-        multiple_q = Q(Q(created_date__range=[dt.strptime(from_date, '%Y-%m-%d').date(), dt.strptime(to_date, '%Y-%m-%d').date()]) & Q(role__in=["employer", "applicant"]))
-        filter_jobpost = Q(Q(created_at__range=[dt.strptime(from_date, '%Y-%m-%d').date(), dt.strptime(to_date, '%Y-%m-%d').date()]))
+        multiple_q = Q(Q(created_date__range=[dt.datetime.strptime(from_date, '%Y-%m-%d').date(), dt.datetime.strptime(to_date, '%Y-%m-%d').date()]) & Q(role__in=["employer", "applicant"]))
+        filter_jobpost = Q(Q(created_at__range=[dt.datetime.strptime(from_date, '%Y-%m-%d').date(), dt.datetime.strptime(to_date, '%Y-%m-%d').date()]))
         users = User.objects.filter(multiple_q)
 
         users_count = User.objects.filter(multiple_q).count()

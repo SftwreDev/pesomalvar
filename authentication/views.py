@@ -83,7 +83,6 @@ class EmployerSignUpView(CreateView):
         user.is_staff = True
         user.is_verified = True
         user.save()
-        print("USER ID", user.id)
         full_name = user.first_name
         email = encrypt_email(user.email)
         link = f"https://pesomalvar.herokuapp.com/verify-email/{email}"
@@ -93,7 +92,8 @@ class EmployerSignUpView(CreateView):
             company_name=form.cleaned_data['company_name'], 
             company_address=form.cleaned_data['company_address'], 
             business_nature=form.cleaned_data['business_nature'],
-            status = "Active"
+            status = "Active",
+            business_permit = form.cleaned_data['business_permit']
             )
         print(send_email(user.email, full_name, link))
         
@@ -110,22 +110,18 @@ def employer_profile(request):
 def employer_update(request, pk):
     template_name = "employer_update.html"
     profile = get_object_or_404(Employer, pk=pk)
+    user_data = get_object_or_404(User, pk=request.user.id)
     form = EmployerUpdateForm(request.POST or None, request.FILES or None, instance=profile )
-    if form.is_valid():
+    user = EmployerUserUpdateForm(request.POST or None, request.FILES or None, instance=user_data )
+    if form.is_valid() and user.is_valid():
         form.save(commit=False)
         form.instance.user_id=request.user.id
-        form.instance.user.profile_picture = request.FILES['profile_picture']
-        print("first_name", request.FILES['profile_picture'])
-        User.objects.filter(id=request.user.id).update(
-            first_name = form.cleaned_data['first_name'],
-            last_name = form.cleaned_data['last_name'],
-            email = form.cleaned_data['email'],
-          
-        )
         form.save()
+        user.save()
         return redirect("employer_profile")
     context = {
-        "form" : form
+        "form" : form,
+        "user" : user
     }
     return render(request, template_name,context)
 
@@ -182,20 +178,18 @@ def applicant_profile(request):
 def applicantprofile_update(request, pk):
     template_name = "applicant_update.html"
     profile = get_object_or_404(Applicant, pk=pk)
+    user_data = get_object_or_404(User, pk=request.user.id)
     form = ApplicantUpdateForm(request.POST or None, request.FILES or None, instance=profile)
-    if form.is_valid():
+    user = ApplicantUserUpdateForm(request.POST or None, request.FILES or None, instance=user_data)
+    if form.is_valid() and user.is_valid():
         applicant = form.save(commit=False)
         applicant.user_id=request.user.id
-        User.objects.filter(id=request.user.id).update(
-            first_name = form.cleaned_data['first_name'],
-            last_name = form.cleaned_data['last_name'],
-            profile_picture = form.cleaned_data['profile_picture'],
-            email = form.cleaned_data['email'],
-        )
+        user.save()
         applicant.save()
         return redirect("applicant_profile")
     context = {
-        "form": form
+        "form": form,
+        "user" : user
     }
     return render(request, template_name, context)
 
@@ -253,7 +247,7 @@ def reset_password_emai(request):
     reset_email = encrypt_email(email)
     link = f"https://pesomalvar.herokuapp.com/reset-password/{reset_email}"
     send_reset_email(email, link)
-    return redirect('login')
+    return redirect('password_reset_email_sent')
 
 def reset_password(request, str):
     template_name = "registration/password_reset.html"
@@ -284,5 +278,10 @@ def verify_email(request, str):
 
 def email_sent(request):
     template_name = "email_sent.html"
+
+    return render(request, template_name)
+
+def password_reset_email_sent(request):
+    template_name = "password_reset_email_sent.html"
 
     return render(request, template_name)

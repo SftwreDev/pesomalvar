@@ -17,7 +17,7 @@ def jobpost_list(request):
     template_name = "jobpost/jobpost_list.html"
     obj = JobPost.objects.filter(status="Active").order_by("-created_at")
     filters  = JobPostFilter(request.GET, queryset=obj)
-    forms = JobPostFormView(request.POST or None)
+    forms = JobPostFormView(request.POST or None, request.FILES or None)
     if forms.is_valid():
         forms.save(commit=False)
         forms.instance.status = "Active"
@@ -98,14 +98,14 @@ def job_posted(request):
 @login_required(login_url="login")
 def applicants(request):
     template_name = "jobpost/applicants.html"
-    obj = JobPost.objects.select_related().filter(posted_by=request.user.id)
-
+    obj = JobPost.objects.select_related().filter(posted_by_id=request.user.id)
+    
     for jobs in obj:
-        applicants = ApplicationForm.objects.select_related().filter(jobs_id=jobs.id)
-        
+        applicants = ApplicationForm.objects.filter(jobs_id=jobs.id)
         context = {
             "applicants" : applicants
         }
+        
         return render(request, template_name, context)
     
     return render(request, template_name)
