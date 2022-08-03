@@ -1,6 +1,8 @@
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 import base64
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 def email_template(link):
     html = """
@@ -83,14 +85,17 @@ def email_template(link):
     return html
 
 def send_reset_email(email, link):
-    subject="PESO | Reset account password"
-    html_message = email_template(link)
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = [email, ]
-    email_message = EmailMultiAlternatives(
-        subject, html_message, email_from, recipient_list,)
-    email_message.attach_alternative(html_message, "text/html")
-    email_message.send()
+    message = Mail(
+    from_email='pesomalvar@gmail.com',
+    to_emails=email,
+    subject='PESO | Reset account password',
+    html_content=email_template(link))
+    try:
+        sg = SendGridAPIClient(
+            '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')
+        sg.send(message)
+    except Exception as e:
+        print(e.message)
 
 
 def encrypt_email(email):
