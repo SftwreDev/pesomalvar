@@ -17,11 +17,13 @@ def proceed_next_step(request, pk):
     template_name = "applicants/applied_job_status.html"
     jobs = JobPost.objects.get(id=pk)
     
+
     try:
         status = ApplicationForm.objects.get(jobs_id=pk, user_id=request.user.id)
     except Exception as e:
         print("ERROR", e)
         status = ""
+
     if request.method == "POST":
         applicant_forms = ApplicantRequirementsForm(request.POST or None, request.FILES or None)
         files = request.FILES.getlist("file")
