@@ -99,11 +99,11 @@ WSGI_APPLICATION = 'pesowebapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "dcdrl0bb1iq5jk",
-        'USER': "yponmavpfxueuu",
-        'PASSWORD': "7fea19ddfc1182523367746f73d6292d837017b008e4e4a71aedfaff3270ceb1",
-        'HOST': "ec2-44-208-88-195.compute-1.amazonaws.com",
-        'PORT':  "5432"
+        'NAME': "railway",
+        'USER': "postgres",
+        'PASSWORD': "0GHtyI9JZqgHAiKzO4Po",
+        'HOST': "containers-us-west-54.railway.app",
+        'PORT':  "6845"
     }
 }
 
